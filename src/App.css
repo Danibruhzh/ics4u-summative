@@ -1,0 +1,14 @@
+.container {
+    background-color: #111111;
+    min-height: calc(100vh-60px);
+    color: white;
+    
+}
+
+body{
+    font-family: "Protest Strike", sans-serif;
+}
+
+button {
+    font-family: "Protest Strike", sans-serif;
+}

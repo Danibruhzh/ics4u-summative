@@ -1,0 +1,171 @@
+.header {
+    width: 100%;
+    height: 55px;
+    background-color: black;
+    left: 0;
+    top: 0;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 50px;
+    height: 100%;
+    color: white;
+}
+
+.logo-container {
+    margin-right: auto;
+}
+
+.logo {
+    font-size: 20px;
+    display: flex;
+    color: crimson;
+    cursor: pointer;
+}
+
+a {
+    color: inherit; /* Inherit the text color of the parent element */
+    text-decoration: none; /* Remove underline */
+}
+
+a:link, a:visited {
+    color: white; /* Default color for links */
+}
+
+.menu-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.menu-list-item {
+    margin-inline: 20px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.active {
+    color: crimson;
+}
+
+.menu-list-item:hover {
+    color: crimson;
+}
+
+.search {
+    display: flex;
+    margin: 15px;
+    align-items: center;
+    width: max-content;
+    height: 30px;
+    padding: 10px;
+    border-radius: 30px;
+    background: #c8c7c7;
+    transition: background 0.25s;
+    justify-content: center;
+}
+
+.sign-in-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+}
+
+.sign-in-button {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.sign-in {
+    border-radius: 20px;
+    padding: 0;
+    font-size: 13px;
+    width: 70px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.1 ease-in-out;
+}
+
+.register-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+}
+
+.register-button {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.register {
+    border-radius: 20px;
+    padding: 0;
+    font-size: 13px;
+    width: 70px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.1 ease-in-out;
+}
+
+.welcome {
+    font-size: 16px;
+    margin: 0 20px;
+    color: lightGray;
+    font-style: italic;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* Evenly spaced buttons */
+    width: 300px;  /* Adjust width for spacing */
+}
+
+.cart-button, .settings-button, .logout-button {
+    width: 80px;  /* Adjusted to have consistent width for each button */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.cart, .settings, .logout {
+    border-radius: 20px;
+    padding: 0;
+    font-size: 13px;
+    width: 70px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.1s ease-in-out;
+}
+
+@media only screen and (max-width: 900px) {
+    .menu-container {
+        display: none;
+    }
+}

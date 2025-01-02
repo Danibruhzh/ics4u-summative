@@ -1,0 +1,170 @@
+/* General Styles */
+* {
+    font-family: "Protest Strike", sans-serif;
+}
+
+.background {
+    opacity: 85%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -999;
+    filter: brightness(40%);
+}
+
+.title {
+    margin: auto;
+    color: crimson;
+    padding: 2vh;
+    box-sizing: border-box;
+
+    width: 50%;
+
+    top: 10vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 200;
+    font-size: 15vh;
+}
+
+.island {
+    position: relative;
+    left: 50%;
+    width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    transform: translate(-50%, +17vh);
+}
+
+.island h2 {
+    color: #fff;
+    margin: auto;
+    font-size: 2rem;
+}
+
+.field {
+    position: relative;
+    height: 55px;
+    margin-bottom: 16px;
+}
+
+.field input {
+    height: 100%;
+    width: 100%;
+    background: #333;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.field input:is(:focus, :valid) {
+    padding-top: 10px;
+    text-indent: 18px;
+    background: #444;
+}
+
+.field label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    color: #8c8c8c;
+    pointer-events: none;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    transition: all 0.1s ease;
+}
+
+.field input:is(:focus, :valid) ~ label {
+    transform: translateY(-130%);
+    font-size: 0.75rem;
+}
+
+form button {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 4px;
+    margin: 10px 0;
+    background: crimson;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+form button:hover {
+    background: rgb(163, 32, 58);
+}
+
+.genre-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 buttons per row */
+    gap: 15px;                             /* Space between buttons */
+    width: 100%;                           /* Ensure it uses full width of the container */
+    max-width: 500px;                      /* Prevent buttons from stretching too wide */
+    margin-top: 20px;
+}
+
+.selection {
+    padding: 10px 20px;           /* Add some padding to make the buttons easier to click */
+    font-size: 1rem;               /* Adjust font size */
+    border: 2px solid #ccc;       /* Border around the buttons */
+    background-color: #444;       /* Dark background for unselected state */
+    color: #fff;                  /* White text color */
+    cursor: pointer;              /* Cursor pointer for interactivity */
+    border-radius: 5px;            /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    outline: none;                 /* Remove the outline when clicking */
+}
+
+.selection.selected {
+    background-color: crimson;    /* Red background for selected button */
+    color: white;                 /* White text for selected button */
+}
+
+.selection:hover {
+    background-color: #555;       /* Darker background when hovered */
+}
+
+.selector-title {
+    grid-column: span 3;                 /* Ensure the title takes up the full width */
+    text-align: center;                  /* Center the title */
+    margin-bottom: 15px;                  /* Space between the title and buttons */
+    color: #fff;                         /* White text color for the title */
+    font-size: 1.5rem;                   /* Adjust font size as needed */
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button.disabled-button {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.logout2{
+    cursor: pointer;
+    color:white;
+    transition:all 0.1s ease-in-out;
+}
+
+.logout2:hover{
+    color:crimson;
+}

@@ -1,0 +1,41 @@
+.featured-content {
+    height: 85vh;
+    padding: 100px;
+    display: flex;
+}
+
+.featured-title {
+    width: 1000px;
+    font-size: 6rem;
+}
+
+.featured-desc {
+    width: 700px;
+    color: lightgray;
+    margin: 30px 0;
+    font-size: larger;
+    font-weight: 400;
+    font-family: "Rubik", sans-serif;
+}
+
+.featured-button {
+    background-color: crimson;
+    color: white;
+    width: 100px;
+    height: 40px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.featured-button:hover {
+    background-color: darkred;
+}
+
+.featured-button.rent {
+    margin: 0px 20px;
+}

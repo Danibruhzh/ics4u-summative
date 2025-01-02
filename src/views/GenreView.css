@@ -1,0 +1,113 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Genre Movie Container */
+.genre-movie-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto; /* Center container */
+    padding: 20px;
+}
+
+/* Genre Title */
+.genre-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: crimson;
+    margin-bottom: 20px;
+}
+
+/* Movies Grid */
+.movies {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 movies per row */
+    grid-template-rows: repeat(4, auto); /* 4 rows */
+    gap: 15px; /* Space between items */
+    justify-content: center;
+    align-items: stretch; /* Align movie cards evenly */
+}
+
+/* Movie Item */
+.movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f8f8; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.movie:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Movie Poster */
+.movie-poster {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid crimson;
+}
+
+/* Movie Title */
+.movie-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Page Turner */
+.page-turner {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+}
+
+.page-turner p {
+    margin: 5px 0;
+}
+
+.page-turner a {
+    cursor: pointer;
+    color: crimson;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.page-turner a:hover {
+    color: darkred;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .movies {
+        grid-template-columns: repeat(2, 1fr); /* 2 movies per row on smaller screens */
+    }
+
+    .genre-title {
+        font-size: 24px;
+    }
+
+    .movie-title {
+        font-size: 14px;
+    }
+}
+
+.add-to-cart{
+    display:flex;
+    position:relative;
+    align-content: center;
+    justify-content: center;
+    left: 30px;
+}

@@ -1,0 +1,130 @@
+/* Cart View Container */
+.cart-view {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cart Title */
+.shopping-cart {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: crimson;
+    margin: 20px 0;
+}
+
+/* Cart List */
+.cart-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    /* 5 items per row */
+    grid-template-rows: repeat(4, auto);
+    /* 4 rows */
+    gap: 15px;
+    /* Space between items */
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* Cart Item */
+.cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f8f8;
+    /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cart-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Movie Poster in Cart */
+.movie-poster3 {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid crimson;
+}
+
+/* Movie Title in Cart */
+.cart-item h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Remove Button */
+button {
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-container2 {
+    display: flex;
+    align-items: center;
+    /* Center horizontally */
+    justify-content: center;
+    /* Center vertically */
+    margin: 10px;
+    /* Optional: Adjust space above buttons */
+}
+
+/* Home and Movies Buttons */
+.home-button,
+.movies-button {
+    background-color: crimson;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 200px;
+    margin: 10px 10px;
+    /* Space between buttons */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover,
+.movies-button:hover {
+    background-color: darkred;
+    /* Darker shade for hover effect */
+    transform: scale(1.05);
+}
+
+.home-button:focus,
+.movies-button:focus {
+    outline: none;
+}
+
+/* Responsive Design for Cart */
+@media (max-width: 768px) {
+    .cart-list {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 items per row on smaller screens */
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .cart-item h2 {
+        font-size: 14px;
+    }
+}

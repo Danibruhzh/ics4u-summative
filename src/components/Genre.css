@@ -1,0 +1,39 @@
+/* Genre List Container */
+.genre-container {
+    background-color: #f4f4f4; /* Light background */
+    padding: 1rem;
+    border-right: 1px solid #ddd; /* Separate visually from main content */
+    height: 100%; /* Full height of the sidebar */
+    overflow-y: auto; /* Make scrollable if content exceeds height */
+}
+
+/* Genre List */
+.genre-list {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual Genre Items */
+.genre {
+    font-size: 1rem; /* Adjust font size for readability */
+    color: #333; /* Dark text color */
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem; /* Space between items */
+    cursor: pointer; /* Indicate clickable items */
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px; /* Slightly rounded corners */
+}
+
+/* Hover Effect */
+.genre:hover {
+    background-color: #007bff; /* Highlight color (e.g., blue) */
+    color: white; /* Contrast text color on hover */
+}
+
+/* Active Genre (Optional if you track selected genre) */
+.genre.active {
+    background-color: #0056b3; /* Darker blue for active state */
+    color: white;
+    font-weight: bold;
+}
