@@ -1,12 +1,14 @@
 import './RegisterView.css'
 import Background from '../images/movie feature.png'
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from '../firebase';
 import { useStoreContext } from '../context'
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function RegisterView() {
-    const { setGenres, setName, setLname, setEmail, setLogged } = useStoreContext();
+    const { setGenres, setName, setLname, setEmail, setLogged, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
     const [genreMap, setGenreMap] = useState([]);
     const firstName = useRef('');
@@ -28,8 +30,22 @@ function RegisterView() {
         })();
     }, []);
 
+    const registerByEmail = async (event) => {
+        // event.preventDefault();
+        try{;
+            const user = (await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)).user;
+            await updateProfile(user, {displayName: `${firstName.current.value} ${lastName.current.value}`});
+            setUser(user);
+            navigate('/');
+        } catch (error) {
+            alert("Error")
+        }
+    }
+
+
     function changeGenres(event) {
         event.preventDefault();
+        registerByEmail();
         if (genreMap.length >= 10) {
             let fullList = genresAll;
             setGenres(fullList.filter((item) => genreMap.includes(item.id)));
