@@ -1,6 +1,6 @@
 import './RegisterView.css'
 import Background from '../images/movie feature.png'
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from '../firebase';
 import { useStoreContext } from '../context'
 import { useEffect, useState, useRef } from 'react';
@@ -31,21 +31,7 @@ function RegisterView() {
     }, []);
 
     const registerByEmail = async (event) => {
-        // event.preventDefault();
-        try{;
-            const user = (await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)).user;
-            await updateProfile(user, {displayName: `${firstName.current.value} ${lastName.current.value}`});
-            setUser(user);
-            navigate('/');
-        } catch (error) {
-            alert("Error")
-        }
-    }
-
-
-    function changeGenres(event) {
         event.preventDefault();
-        registerByEmail();
         if (genreMap.length >= 10) {
             let fullList = genresAll;
             setGenres(fullList.filter((item) => genreMap.includes(item.id)));
@@ -53,7 +39,30 @@ function RegisterView() {
             setLname(lastName.current.value.trim());
             setEmail(email.current.value.trim());
             setLogged(true);
-            navigate("/");
+            try {
+                const user = (await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)).user;
+                await updateProfile(user, { displayName: `${firstName.current.value} ${lastName.current.value}` });
+                setUser(user);
+                navigate("/");
+            } catch (error) {
+                alert("Error creating account");
+            }
+        } else {
+            alert("Please select at least 10 genres!");
+        }
+    }
+
+    const registerByGoogle = async (event) => {
+        event.preventDefault();
+        if (genreMap.length >= 10) {
+            try {
+                const user = (await signInWithPopup(auth, new GoogleAuthProvider()).user);
+                setUser(user);
+                console.log(user);
+                navigate("/");
+            } catch (error) {
+                alert("Error creating account");
+            }
         } else {
             alert("Please select at least 10 genres!");
         }
@@ -115,7 +124,8 @@ function RegisterView() {
                         <input type="password" ref={confirmPassword} onChange={updateForm} required />
                         <label>Re-enter Password</label>
                     </div>
-                    <button onClick={changeGenres} disabled={!valid} className={!valid ? 'disabled-button' : ''}>Create Account</button>
+                    <button onClick={registerByEmail} disabled={!valid} className={!valid ? 'disabled-button' : ''}>Create Account</button>
+                    <button onClick={registerByGoogle} className="valid">Sign in with Google</button>
                     <div className="help">
                         <div className="terms">
                             <input type="checkbox" id="terms" checked={isChecked} onClick={() => { setIsChecked(!isChecked) }} />
@@ -133,6 +143,10 @@ function RegisterView() {
                         }}>{genre.name}</button>
                     ))}
                 </div>
+            </div>
+
+            <div className="google">
+                <button onClick={() => { registerByGoogle() }}>google</button>
             </div>
         </div>
     )
