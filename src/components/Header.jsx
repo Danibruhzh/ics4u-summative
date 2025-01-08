@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useStoreContext } from '../context';
 
 function Header() {
-    const { name, lname, setName, logged, setLogged } = useStoreContext();
+    const { user, setUser } = useStoreContext();
     const navigate = useNavigate();
 
-    if (logged === false) {
+    if (!user) {
         return (
             <div className="header">
                 <div className="header-container">
@@ -16,7 +16,7 @@ function Header() {
                         </div>
                     </div>
                     <div className='welcome'>
-                        <p>Welcome, {name}!</p>
+                        <p>Welcome, Guest!</p>
                     </div>
                     <div className="menu-container">
                         <div className="menu">
@@ -60,7 +60,7 @@ function Header() {
                         </div>
                     </div>
                     <div className='welcome'>
-                        <p>Welcome, {name} {lname}!</p>
+                        <p>Welcome, {user.displayName}!</p>
                     </div>
                     <div className="menu-container">
                         <div className="menu">
@@ -94,7 +94,7 @@ function Header() {
                     <div className="logout-button-container">
                         <div className="logout-button">
                             <form>
-                                <button className="logout" onClick={() => { setLogged(false); setName("Guest") }}>Logout</button>
+                                <button className="logout" onClick={() => {setUser(null)}}>Logout</button>
                             </form>
                         </div>
                     </div>

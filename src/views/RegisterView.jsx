@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function RegisterView() {
-    const { setGenres, setName, setLname, setEmail, setLogged, setUser } = useStoreContext();
+    const { setGenres, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
     const [genreMap, setGenreMap] = useState([]);
     const firstName = useRef('');
@@ -35,10 +35,6 @@ function RegisterView() {
         if (genreMap.length >= 10) {
             let fullList = genresAll;
             setGenres(fullList.filter((item) => genreMap.includes(item.id)));
-            setName(firstName.current.value.trim());
-            setLname(lastName.current.value.trim());
-            setEmail(email.current.value.trim());
-            setLogged(true);
             try {
                 const user = (await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)).user;
                 await updateProfile(user, { displayName: `${firstName.current.value} ${lastName.current.value}` });
@@ -55,10 +51,12 @@ function RegisterView() {
     const registerByGoogle = async (event) => {
         event.preventDefault();
         if (genreMap.length >= 10) {
+            let fullList = genresAll;
+            setGenres(fullList.filter((item) => genreMap.includes(item.id)));
+
             try {
-                const user = (await signInWithPopup(auth, new GoogleAuthProvider()).user);
+                const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
                 setUser(user);
-                console.log(user);
                 navigate("/");
             } catch (error) {
                 alert("Error creating account");
@@ -125,11 +123,11 @@ function RegisterView() {
                         <label>Re-enter Password</label>
                     </div>
                     <button onClick={registerByEmail} disabled={!valid} className={!valid ? 'disabled-button' : ''}>Create Account</button>
-                    <button onClick={registerByGoogle} className="valid">Sign in with Google</button>
+                    <button onClick={registerByGoogle} disabled={!isChecked} className={!isChecked ? 'disabled-button' : ''}>Sign in with Google</button>
                     <div className="help">
                         <div className="terms">
                             <input type="checkbox" id="terms" checked={isChecked} onClick={() => { setIsChecked(!isChecked) }} />
-                            <label for="terms"> Agree to <a href="#">Terms & Conditions</a></label>
+                            <label> Agree to <a href="https://laws-lois.justice.gc.ca/eng/const/" target="_blank">Terms & Conditions</a></label>
                         </div>
                         <a href="#">Need help?</a>
                     </div>
@@ -143,10 +141,6 @@ function RegisterView() {
                         }}>{genre.name}</button>
                     ))}
                 </div>
-            </div>
-
-            <div className="google">
-                <button onClick={() => { registerByGoogle() }}>google</button>
             </div>
         </div>
     )
