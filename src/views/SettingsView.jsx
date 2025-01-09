@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function SettingsView() {
-    const { genres, setGenres, name, setName, lname, setLname, email, setLogged } = useStoreContext();
+    const { genres, setGenres, lname, setLname, email, setLogged, user, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
     const [genreMap, setGenreMap] = useState([]);
+    const name = user.displayName.split(" ");
     const firstName = useRef('');
     const lastName = useRef('');
     const navigate = useNavigate();
+    console.log(user);
 
     useEffect(() => {
         (async function getGenres() {
@@ -29,6 +31,7 @@ function SettingsView() {
         let fullList = genresAll;
         setGenres(fullList.filter((item) => genreMap.some((check) => check.id === item.id)));
         if (firstName.current.value.trim() !== '') {
+
             setName(firstName.current.value.trim());
         }
         if (lastName.current.value.trim() !== '') {
@@ -51,9 +54,7 @@ function SettingsView() {
         <div className='register-container'>
             <img src={Background} alt="Movie background" className="background" />
             <div>
-                <form>
-                    <button className="home" id="home-button" onClick={() => navigate('/')}>Home</button>
-                </form>
+                <button className="home" id="home-button" onClick={() => navigate('/')}>Home</button>
             </div>
             <div>
                 <h1 className="title">
@@ -64,27 +65,35 @@ function SettingsView() {
                 <h2>Settings</h2>
                 <div className="current-field">
                     <label>Current First Name:</label>
-                    <p>{name}</p>
+                    <p>{name[0]}</p>
                 </div>
                 <div className="current-field">
                     <label>Current Last Name:</label>
-                    <p>{lname}</p>
+                    <p>{name[1]}</p>
                 </div>
                 <div className="current-field">
                     <label>Current Email:</label>
-                    <p>{email}</p>
+                    <p>{user.email}</p>
                 </div>
+
                 <form>
-                    <div className="field">
-                        <input type="text" ref={firstName} required />
-                        <label>Update First Name</label>
-                    </div>
-                    <div className="field">
-                        <input type="text" ref={lastName} required />
-                        <label>Update Last Name</label>
-                    </div>
+                    {(user.providerData[0].providerId !== "google.com") && (
+                        <div>
+                            <div className="field">
+                                <input type="text" ref={firstName} required />
+                                <label>Update First Name</label>
+                            </div>
+                            <div className="field">
+                                <input type="text" ref={lastName} required />
+                                <label>Update Last Name</label>
+                            </div>
+                        </div>
+                    )}
                     <button onClick={changeGenres}>Update Settings</button>
                 </form>
+
+
+
                 <a className='logout2' onClick={() => { setLogged(false); setName("Guest"); navigate('/register') }}>Logout</a>
                 <div className="genre-selector">
                     <h3 className='selector-title'>Update your prefered genres</h3>

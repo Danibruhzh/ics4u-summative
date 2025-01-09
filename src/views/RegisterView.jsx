@@ -53,7 +53,6 @@ function RegisterView() {
         if (genreMap.length >= 10) {
             let fullList = genresAll;
             setGenres(fullList.filter((item) => genreMap.includes(item.id)));
-
             try {
                 const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
                 setUser(user);

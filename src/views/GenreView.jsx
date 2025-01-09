@@ -12,7 +12,7 @@ function GenreView() {
     const params = useParams();
     const [page, setPage] = useState(1);
     const navigate = useNavigate();
-    const { cart, setCart, logged } = useStoreContext();
+    const { cart, setCart, logged, user } = useStoreContext();
 
 
     useEffect(() => {
@@ -48,6 +48,7 @@ function GenreView() {
     return (
         <div>
             <div className="genre-movie-container">
+                <p>{user.displayName}</p>
                 <h1 className="genre-title"> {genreMap.get(Number(params.genre_id))} </h1>
                 <div className="movies">
                     {movies.slice(0, 21).map((movie, index) => (

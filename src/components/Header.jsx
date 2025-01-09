@@ -5,6 +5,7 @@ import { useStoreContext } from '../context';
 function Header() {
     const { user, setUser } = useStoreContext();
     const navigate = useNavigate();
+    console.log(user);
 
     if (!user) {
         return (
@@ -79,23 +80,17 @@ function Header() {
                     </div>
                     <div className="card-button-container">
                         <div className="cart-button">
-                            <form>
-                                <button className="cart" onClick={() => navigate('/cart')}>Cart</button>
-                            </form>
+                            <button className="cart" onClick={() => navigate('/cart')}>Cart</button>
                         </div>
                     </div>
                     <div className="settings-button-container">
                         <div className="settings-button">
-                            <form>
-                                <button className="settings" onClick={() => navigate('/settings')}>Settings</button>
-                            </form>
+                            <button className="settings" onClick={() => navigate('/settings')}>Settings</button>
                         </div>
                     </div>
                     <div className="logout-button-container">
                         <div className="logout-button">
-                            <form>
-                                <button className="logout" onClick={() => {setUser(null)}}>Logout</button>
-                            </form>
+                            <button className="logout" onClick={() => setUser(null)}>Logout</button>
                         </div>
                     </div>
                 </div>
