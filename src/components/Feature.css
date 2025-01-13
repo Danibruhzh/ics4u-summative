@@ -106,6 +106,7 @@
 }
 
 .movie-list-item-button.rent {
+    width:100px;
     left: 120px;
 }
 

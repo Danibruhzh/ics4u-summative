@@ -21,6 +21,12 @@ function CartView() {
         );
     })
 
+    function checkout(){
+        setCart((prevCart) => prevCart.clear());
+        alert('Thank you for checking out!'); //fix this
+        navigate('/');
+    }
+
     if (cartItems.length > 0) {
         return (
             <div>
@@ -32,6 +38,7 @@ function CartView() {
                 <div className="cart-list">
                     {cartItems}
                 </div>
+                <button className="checkout-button" onClick={() => checkout()}>Checkout</button>
             </div>
         )
     } else {

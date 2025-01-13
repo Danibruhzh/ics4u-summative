@@ -6,7 +6,7 @@ import './Hero.css';
 
 function Hero() {
   const [movie, setMovie] = useState([]);
-  const { cart, setCart, logged } = useStoreContext();
+  const { cart, setCart, user } = useStoreContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Hero() {
         <h1 className="featured-title">{movie.original_title}</h1>
         <p className="featured-desc">{movie.overview}</p>
         <button className="featured-button watch" onClick={() => { loadMovie(movie.id) }}>Details</button>
-        <button className="featured-button rent" onClick={() => { logged ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && logged ? 'Added' : 'Buy'}`}</button>
+        <button className="featured-button rent" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
       </div>
     </div>
   )

@@ -12,7 +12,7 @@ function GenreView() {
     const params = useParams();
     const [page, setPage] = useState(1);
     const navigate = useNavigate();
-    const { cart, setCart, logged, user } = useStoreContext();
+    const { cart, setCart, user } = useStoreContext();
 
 
     useEffect(() => {
@@ -62,7 +62,7 @@ function GenreView() {
                                 <span className="movie-title">{movie.original_title}</span>
 
                             </div>
-                            <button className="add-to-cart" onClick={() => { logged ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && logged ? 'Added' : 'Buy'}`}</button>
+                            <button className="add-to-cart" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
                         </div>
                     ))}
                 </div>

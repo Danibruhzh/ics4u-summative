@@ -8,7 +8,7 @@ function DetailView() {
     const [movie, setMovie] = useState([]);
     const [genres, setGenres] = useState([]);
     const [trailers, setTrailers] = useState([]);
-    const { cart, setCart, logged } = useStoreContext();
+    const { cart, setCart, user } = useStoreContext();
     const params = useParams();
 
     useEffect(() => {
@@ -30,7 +30,7 @@ function DetailView() {
             <div className='movie-genres'>
                 <strong>Genres:</strong>{genres.map((obj, index) => (<span key={index}> {obj.name}{index < genres.length - 1 ? ', ' : ''}</span>))}
             </div>
-            <button className="add-to-cart" onClick={() => { logged ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && logged ? 'Added' : 'Buy'}`}</button>
+            <button className="add-to-cart" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
             <div className="movie-info">
                 <div className='release-date'><strong>Release Date:</strong> {movie.release_date}</div>
                 <div className='runtime'><strong>Runtime:</strong> {movie.runtime} minutes</div>

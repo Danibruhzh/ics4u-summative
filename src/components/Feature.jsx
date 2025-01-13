@@ -9,7 +9,7 @@ function Feature() {
     const navigate = useNavigate();
     const [clickCount, setClickCount] = useState(0);
     const [currentTransform, setCurrentTransform] = useState(0);
-    const { cart, setCart, logged } = useStoreContext();
+    const { cart, setCart, user } = useStoreContext();
 
     useEffect(() => {
         (async function getMovies() {
@@ -62,7 +62,7 @@ function Feature() {
                                 <span className="movie-list-item-title">{movie.original_title}</span>
                                 <p className="movie-list-item-desc">{movie.overview}</p>
                                 <button className="movie-list-item-button" onClick={() => { loadMovie(movie.id) }}>Details</button>
-                                <button className="movie-list-item-button rent" onClick={() => { logged ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && logged ? 'Added' : 'Buy'}`}</button>
+                                <button className="movie-list-item-button rent" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
                             </div>
                         ))}
                     </div>

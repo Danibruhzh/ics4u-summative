@@ -1,11 +1,18 @@
 import './Header.css'
 import { useNavigate } from 'react-router-dom';
 import { useStoreContext } from '../context';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 function Header() {
     const { user, setUser } = useStoreContext();
     const navigate = useNavigate();
     console.log(user);
+
+    function logout() {
+        setUser(null);
+        signOut(auth);
+    }
 
     if (!user) {
         return (
@@ -90,7 +97,7 @@ function Header() {
                     </div>
                     <div className="logout-button-container">
                         <div className="logout-button">
-                            <button className="logout" onClick={() => setUser(null)}>Logout</button>
+                            <button className="logout" onClick={() => logout()}>Logout</button>
                         </div>
                     </div>
                 </div>

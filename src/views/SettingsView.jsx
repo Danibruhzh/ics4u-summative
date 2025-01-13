@@ -92,8 +92,6 @@ function SettingsView() {
                     <button onClick={changeGenres}>Update Settings</button>
                 </form>
 
-
-
                 <a className='logout2' onClick={() => { setLogged(false); setName("Guest"); navigate('/register') }}>Logout</a>
                 <div className="genre-selector">
                     <h3 className='selector-title'>Update your prefered genres</h3>

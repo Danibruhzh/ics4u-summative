@@ -37,5 +37,6 @@
 }
 
 .featured-button.rent {
+    width: 120px;
     margin: 0px 20px;
 }
