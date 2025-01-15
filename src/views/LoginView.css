@@ -197,3 +197,13 @@ form .help :where(label, a) {
     border-color: rgb(53, 132, 201);
     cursor: pointer;
 }
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button.disabled-button {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}

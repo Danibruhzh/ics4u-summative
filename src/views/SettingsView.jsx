@@ -22,6 +22,7 @@ function SettingsView() {
             );
             setGenresAll(response.data.genres.filter(genre => genre.name !== "Documentary" && genre.name !== "Drama" && genre.name !== "Romance" && genre.name !== "TV Movie"));
             setGenreMap(genres);
+            console.log(user);
         })();
     }, []);
 
