@@ -3,17 +3,18 @@ import Background from '../images/movie feature.png'
 import { useStoreContext } from '../context'
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signOut, updateProfile } from 'firebase/auth';
+import { auth } from '../firebase';
 import axios from 'axios';
 
 function SettingsView() {
-    const { genres, setGenres, lname, setLname, email, setLogged, user, setUser } = useStoreContext();
+    const { genres, setGenres, setLname, user, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
     const [genreMap, setGenreMap] = useState([]);
     const name = user.displayName.split(" ");
     const firstName = useRef('');
     const lastName = useRef('');
     const navigate = useNavigate();
-    console.log(user);
 
     useEffect(() => {
         (async function getGenres() {
@@ -27,16 +28,24 @@ function SettingsView() {
     }, []);
 
 
-    function changeGenres(event) {
+    const update = async (event) => {
         event.preventDefault();
         let fullList = genresAll;
         setGenres(fullList.filter((item) => genreMap.some((check) => check.id === item.id)));
-        if (firstName.current.value.trim() !== '') {
-
-            setName(firstName.current.value.trim());
-        }
-        if (lastName.current.value.trim() !== '') {
-            setLname(lastName.current.value.trim());
+        if (user.providerData[0].providerId !== "google.com") {
+            if (firstName.current.value.trim() && lastName.current.value.trim()) {
+                await updateProfile(user, {displayName: `${firstName.current.value.trim()} ${lastName.current.value.trim()}`});
+                setUser((prev) => ({...prev, displayName: `${firstName.current.value.trim()} ${lastName.current.value.trim()}`}));
+            } else if (firstName.current.value.trim()) {
+                const lname = user.displayName.split(" ")[1];
+                await updateProfile(user, {displayName: `${firstName.current.value.trim()} ${lname}`});
+                setUser((prev) => ({...prev, displayName: `${firstName.current.value.trim()} ${lname}`}));
+            } else if (lastName.current.value.trim()) {
+                const fname = user.displayName.split(" ")[0];
+                await updateProfile(user, {displayName: `${fname} ${lastName.current.value.trim()}`});
+                setUser((prev) => ({...prev, displayName: `${fname} ${lastName.current.value.trim()}`}));
+            }
+            
         }
         navigate("/");
     }
@@ -50,6 +59,11 @@ function SettingsView() {
             }
         })
     };
+
+    function logout() {
+        setUser(null);
+        signOut(auth);
+    }
 
     return (
         <div className='register-container'>
@@ -90,10 +104,10 @@ function SettingsView() {
                             </div>
                         </div>
                     )}
-                    <button onClick={changeGenres}>Update Settings</button>
+                    <button onClick={update}>Update Settings</button>
                 </form>
 
-                <a className='logout2' onClick={() => { setLogged(false); setName("Guest"); navigate('/register') }}>Logout</a>
+                <a className='logout2' onClick={() => {logout()}}>Logout</a>
                 <div className="genre-selector">
                     <h3 className='selector-title'>Update your prefered genres</h3>
                     {genresAll.map((genre) => (

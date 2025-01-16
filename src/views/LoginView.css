@@ -197,13 +197,28 @@ form .help :where(label, a) {
     border-color: rgb(53, 132, 201);
     cursor: pointer;
 }
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
 
 button.disabled-button {
     background-color: #ccc;
     cursor: not-allowed;
     opacity: 0.5;
+}
+
+.sign-in-with-google {
+    width: 100%;
+    padding: 16px 0;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 4px;
+    margin: 10px 0;
+    background: crimson;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+.sign-in-with-google:hover {
+    background: rgb(163, 32, 58);
 }

@@ -15,12 +15,23 @@ function LoginView() {
 
     const loginWithEmail = async (event) => {
         event.preventDefault();
-        try{
-            const user = (await signInWithEmailAndPassword(auth, email.current.value.trim(), password.current.value.trim()))
+        try {
+            const user = (await signInWithEmailAndPassword(auth, email.current.value.trim(), password.current.value.trim())).user;
             setUser(user);
             navigate('/');
-        } catch(error){
+        } catch (error) {
             alert("Wrong email or password!")
+        }
+    }
+
+    const loginWithGoogle = async (event) => {
+        event.preventDefault();
+        try {
+            const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
+            setUser(user);
+            navigate('/');
+        } catch (error) {
+            alert("Error signing in!");
         }
     }
 
@@ -57,15 +68,17 @@ function LoginView() {
                         <label>Password</label>
                     </div>
                     <button onClick={loginWithEmail} disabled={!valid} className={!valid ? 'disabled-button' : ''}>Sign In</button>
+
                     <div className="help">
                         <div className="remember">
                             <input type="checkbox" id="remember" />
-                            <label for="remember">Remember me</label>
+                            <label>Remember me</label>
                         </div>
                         <a href="https://blockblast.org/" target='_blank'>Need help?</a>
                     </div>
                 </form>
                 <p>New to Freakflix? <a href="/register">Create account</a></p>
+                <button className="sign-in-with-google" onClick={loginWithGoogle}>Sign in with Google</button>
             </div>
         </div>
     )
