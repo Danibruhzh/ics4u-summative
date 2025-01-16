@@ -29,7 +29,7 @@ function LoginView() {
         try {
             const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
             setUser(user);
-            navigate('/');
+            navigate("/settings");
         } catch (error) {
             alert("Error signing in!");
         }
