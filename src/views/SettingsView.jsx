@@ -27,7 +27,6 @@ function SettingsView() {
         })();
     }, []);
 
-
     const update = async (event) => {
         event.preventDefault();
         if (genreMap.length >= 10) {

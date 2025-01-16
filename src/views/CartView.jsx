@@ -1,9 +1,11 @@
 import { useStoreContext } from "../context";
 import { useNavigate } from "react-router-dom";
+import { firestore } from "../firebase";
+import { doc, setDoc } from "firebase/firestore"; 
 import "./Cartview.css"
 
 function CartView() {
-    const { cart, setCart } = useStoreContext();
+    const { cart, setCart, user } = useStoreContext();
     const navigate = useNavigate();
     const cartItems = [];
 
@@ -21,7 +23,8 @@ function CartView() {
         );
     })
 
-    function checkout(){
+    async function checkout(){
+        const docRef = doc(firestore, "users", user.uid);
         setCart((prevCart) => prevCart.clear());
         alert('Thank you for checking out!'); //fix this
         navigate('/');

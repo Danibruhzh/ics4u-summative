@@ -1,14 +1,15 @@
 import './RegisterView.css'
 import Background from '../images/movie feature.png'
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from '../firebase';
+import { auth, firestore} from '../firebase';
+import { doc, setDoc } from "firebase/firestore"; 
 import { useStoreContext } from '../context'
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function RegisterView() {
-    const { setGenres, setUser } = useStoreContext();
+    const { genres, setGenres, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
     const [genreMap, setGenreMap] = useState([]);
     const firstName = useRef('');
@@ -39,8 +40,11 @@ function RegisterView() {
                 const user = (await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)).user;
                 await updateProfile(user, { displayName: `${firstName.current.value} ${lastName.current.value}` });
                 setUser(user);
+                const docRef = doc(firestore, "users", user.uid);
+                await setDoc(docRef, {genres: genres});
                 navigate("/");
             } catch (error) {
+                console.log(error);
                 alert("Error creating account");
             }
         } else {

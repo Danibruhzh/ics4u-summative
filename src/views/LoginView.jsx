@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 
 import { useStoreContext } from '../context'
 
 function LoginView() {
-    const { setUser } = useStoreContext();
+    const { setUser, setGenres } = useStoreContext();
     const email = useRef('');
     const password = useRef('');
     const [valid, setValid] = useState(false);
@@ -18,6 +18,7 @@ function LoginView() {
         try {
             const user = (await signInWithEmailAndPassword(auth, email.current.value.trim(), password.current.value.trim())).user;
             setUser(user);
+            
             navigate('/');
         } catch (error) {
             alert("Wrong email or password!")
