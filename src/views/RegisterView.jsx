@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function RegisterView() {
-    const { genres, setGenres, setUser } = useStoreContext();
+    const { setGenres, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
     const [genreMap, setGenreMap] = useState([]);
     const firstName = useRef('');
@@ -35,13 +35,14 @@ function RegisterView() {
         event.preventDefault();
         if (genreMap.length >= 10) {
             let fullList = genresAll;
-            setGenres(fullList.filter((item) => genreMap.includes(item.id)));
+            const newGenres = fullList.filter((item) => genreMap.includes(item.id));
+            setGenres(newGenres);
             try {
                 const user = (await createUserWithEmailAndPassword(auth, email.current.value, password.current.value)).user;
                 await updateProfile(user, { displayName: `${firstName.current.value} ${lastName.current.value}` });
                 setUser(user);
                 const docRef = doc(firestore, "users", user.uid);
-                await setDoc(docRef, {genres: genres});
+                await setDoc(docRef, {genres: newGenres});
                 navigate("/");
             } catch (error) {
                 console.log(error);

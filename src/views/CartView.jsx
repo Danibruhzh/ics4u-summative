@@ -1,7 +1,7 @@
 import { useStoreContext } from "../context";
 import { useNavigate } from "react-router-dom";
 import { firestore } from "../firebase";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, updateDoc } from "firebase/firestore"; 
 import "./Cartview.css"
 
 function CartView() {
@@ -25,6 +25,7 @@ function CartView() {
 
     async function checkout(){
         const docRef = doc(firestore, "users", user.uid);
+        await updateDoc(docRef, {purchases: cart.toJS()});
         setCart((prevCart) => prevCart.clear());
         alert('Thank you for checking out!'); //fix this
         navigate('/');

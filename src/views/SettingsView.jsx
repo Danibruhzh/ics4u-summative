@@ -4,16 +4,24 @@ import { useStoreContext } from '../context'
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signOut, updateProfile } from 'firebase/auth';
-import { auth } from '../firebase';
+import { doc, updateDoc } from 'firebase/firestore';
+import { auth, firestore } from '../firebase';
 import axios from 'axios';
 
 function SettingsView() {
     const { genres, setGenres, user, setUser } = useStoreContext();
     const [genresAll, setGenresAll] = useState([]);
+
     const [genreMap, setGenreMap] = useState([]);
     const name = user.displayName.split(" ");
-    const firstName = useRef('');
-    const lastName = useRef('');
+    // const firstName = useRef('');
+    // const lastName = useRef('');
+
+    const [firstName, setFirstName] = useState(name[0]);
+    const [lastName, setLastName] = useState(name[1]);
+
+
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,19 +39,30 @@ function SettingsView() {
         event.preventDefault();
         if (genreMap.length >= 10) {
             let fullList = genresAll;
-            setGenres(fullList.filter((item) => genreMap.some((check) => check.id === item.id)));
+            const newGenres = fullList.filter((item) => genreMap.some((check) => check.id === item.id));
+            setGenres(newGenres);
+            console.log(newGenres);
             if (user.providerData[0].providerId !== "google.com") {
-                if (firstName.current.value.trim() && lastName.current.value.trim()) {
-                    await updateProfile(user, { displayName: `${firstName.current.value.trim()} ${lastName.current.value.trim()}` });
-                    setUser((prev) => ({ ...prev, displayName: `${firstName.current.value.trim()} ${lastName.current.value.trim()}` }));
-                } else if (firstName.current.value.trim()) {
+                if (firstName.trim() && lastName.trim()) {
+                    await updateProfile(user, { displayName: `${firstName.trim()} ${lastName.trim()}` });
+                    setUser((prev) => ({ ...prev, displayName: `${firstName.trim()} ${lastName.trim()}` }));
+                    const docRef = doc(firestore, "users", user.uid);
+                    await updateDoc(docRef, { genres: newGenres, });
+                } else if (firstName.trim()) {
                     const lname = user.displayName.split(" ")[1];
-                    await updateProfile(user, { displayName: `${firstName.current.value.trim()} ${lname}` });
-                    setUser((prev) => ({ ...prev, displayName: `${firstName.current.value.trim()} ${lname}` }));
-                } else if (lastName.current.value.trim()) {
+                    await updateProfile(user, { displayName: `${firstName.trim()} ${lname}` });
+                    setUser((prev) => ({ ...prev, displayName: `${firstName.trim()} ${lname}` }));
+                    const docRef = doc(firestore, "users", user.uid);
+                    await updateDoc(docRef, { genres: newGenres });
+                } else if (lastName.trim()) {
                     const fname = user.displayName.split(" ")[0];
-                    await updateProfile(user, { displayName: `${fname} ${lastName.current.value.trim()}` });
-                    setUser((prev) => ({ ...prev, displayName: `${fname} ${lastName.current.value.trim()}` }));
+                    await updateProfile(user, { displayName: `${fname} ${lastName.trim()}` });
+                    setUser((prev) => ({ ...prev, displayName: `${fname} ${lastName.trim()}` }));
+                    const docRef = doc(firestore, "users", user.uid);
+                    await updateDoc(docRef, { genres: newGenres });
+                } else {
+                    const docRef = doc(firestore, "users", user.uid);
+                    await updateDoc(docRef, { genres: newGenres });
                 }
             }
             navigate("/");
@@ -67,6 +86,8 @@ function SettingsView() {
         setUser(null);
         signOut(auth);
     }
+
+    console.log(firstName);
 
     return (
         <div className='register-container'>
@@ -100,11 +121,11 @@ function SettingsView() {
                     {(user.providerData[0].providerId !== "google.com") && (
                         <div>
                             <div className="field">
-                                <input type="text" ref={firstName} required />
+                                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
                                 <label>Update First Name</label>
                             </div>
                             <div className="field">
-                                <input type="text" ref={lastName} required />
+                                <input type="text" value={lastname} onChange={(e) => setLastName(e.target.value)} required />
                                 <label>Update Last Name</label>
                             </div>
                         </div>
