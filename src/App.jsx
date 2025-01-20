@@ -11,6 +11,7 @@ import Feature from './components/Feature'
 import CartView from './views/CartView'
 import SettingsView from './views/SettingsView'
 import ProtectedRoutes from "./util/ProtectedRoutes"
+import ErrorView from "./views/ErrorView"
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/cart" element={<CartView />} />
             <Route path="/settings" element={<SettingsView />} />
           </Route>
+          <Route path="*" element={<ErrorView />} />
         </Routes>
       </BrowserRouter>
     </StoreProvider>

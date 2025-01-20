@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useStoreContext } from '../context'
+import AddToCart from '../components/AddToCart'
 
 function GenreView() {
     const [movies, setMovies] = useState([]);
@@ -12,7 +13,7 @@ function GenreView() {
     const params = useParams();
     const [page, setPage] = useState(1);
     const navigate = useNavigate();
-    const { cart, setCart, user } = useStoreContext();
+    const { user } = useStoreContext();
 
 
     useEffect(() => {
@@ -62,7 +63,7 @@ function GenreView() {
                                 <span className="movie-title">{movie.original_title}</span>
 
                             </div>
-                            <button className="add-to-cart" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
+                            <AddToCart className="add-to-cart2" movie={movie} />
                         </div>
                     ))}
                 </div>

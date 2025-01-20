@@ -2,12 +2,13 @@ import './LoginView.css'
 import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Background from '../images/movie feature.png'
-import { auth } from '../firebase'
+import { auth, firestore } from '../firebase'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { useStoreContext } from '../context'
 
 function LoginView() {
-    const { setUser, setGenres } = useStoreContext();
+    const { setUser } = useStoreContext();
     const email = useRef('');
     const password = useRef('');
     const [valid, setValid] = useState(false);
@@ -18,7 +19,7 @@ function LoginView() {
         try {
             const user = (await signInWithEmailAndPassword(auth, email.current.value.trim(), password.current.value.trim())).user;
             setUser(user);
-            
+
             navigate('/');
         } catch (error) {
             alert("Wrong email or password!")
@@ -30,7 +31,19 @@ function LoginView() {
         try {
             const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
             setUser(user);
-            navigate("/settings");
+            try {
+                const docRef = doc(firestore, "users", user.uid);
+                console.log(user.uid);
+                const info = await getDoc(docRef);
+                if (info.data()) {
+                    navigate("/");
+                } else{
+                    await setDoc(docRef, {genres: []});
+                    navigate("/settings");
+                }
+            } catch (error) {
+                console.log(error);
+            }
         } catch (error) {
             alert("Error signing in!");
         }

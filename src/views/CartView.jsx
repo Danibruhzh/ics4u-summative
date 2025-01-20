@@ -1,13 +1,19 @@
 import { useStoreContext } from "../context";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { firestore } from "../firebase";
-import { doc, updateDoc } from "firebase/firestore"; 
+import { doc, updateDoc } from "firebase/firestore";
 import "./Cartview.css"
 
 function CartView() {
-    const { cart, setCart, user } = useStoreContext();
+    const { cart, setCart, user, purchases, setPurchases } = useStoreContext();
     const navigate = useNavigate();
     const cartItems = [];
+
+    useEffect(() => {
+        localStorage.setItem(user.uid, JSON.stringify(cart.toJS()));
+        console.log(cart);
+    });
 
     cart.forEach((movie, id) => {
         cartItems.push(
@@ -18,16 +24,25 @@ function CartView() {
                     src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
                     alt={movie.title}
                 />
-                <button onClick={() => setCart((prevCart) => prevCart.delete(id))}>Remove</button>
+                <button onClick={() => remove(id)}>Remove</button>
             </div>
         );
     })
 
-    async function checkout(){
+    const remove = (id) => {
+        setCart((prevCart) => prevCart.delete(id))
+    }
+
+
+
+    async function checkout() {
         const docRef = doc(firestore, "users", user.uid);
-        await updateDoc(docRef, {purchases: cart.toJS()});
+        const updatedPurchases = purchases.merge(cart);
+        await updateDoc(docRef, { purchases: updatedPurchases.toJS() });
         setCart((prevCart) => prevCart.clear());
-        alert('Thank you for checking out!'); //fix this
+        localStorage.setItem(user.uid, {});
+        setPurchases(updatedPurchases);
+        alert('Thank you for checking out!');
         navigate('/');
     }
 

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStoreContext } from '../context'
+import AddToCart from '../components/AddToCart'
 
 function DetailView() {
     const [movie, setMovie] = useState([]);
@@ -30,7 +31,7 @@ function DetailView() {
             <div className='movie-genres'>
                 <strong>Genres:</strong>{genres.map((obj, index) => (<span key={index}> {obj.name}{index < genres.length - 1 ? ', ' : ''}</span>))}
             </div>
-            <button className="add-to-cart" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
+            <AddToCart className="add-to-cart" movie={movie} />
             <div className="movie-info">
                 <div className='release-date'><strong>Release Date:</strong> {movie.release_date}</div>
                 <div className='runtime'><strong>Runtime:</strong> {movie.runtime} minutes</div>

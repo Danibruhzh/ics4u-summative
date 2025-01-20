@@ -57,10 +57,13 @@ function RegisterView() {
         event.preventDefault();
         if (genreMap.length >= 10) {
             let fullList = genresAll;
-            setGenres(fullList.filter((item) => genreMap.includes(item.id)));
+            const newGenres = fullList.filter((item) => genreMap.includes(item.id));
+            setGenres(newGenres);
             try {
                 const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
                 setUser(user);
+                const docRef = doc(firestore, "users", user.uid);
+                await setDoc(docRef, {genres: newGenres});
                 navigate("/");
             } catch (error) {
                 alert("Error creating account");

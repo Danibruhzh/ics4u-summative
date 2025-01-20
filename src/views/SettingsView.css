@@ -1,4 +1,3 @@
-/* General Styles */
 * {
     font-family: "Protest Strike", sans-serif;
 }
@@ -51,6 +50,11 @@
     font-size: 2rem;
 }
 
+.current-label{
+    margin-top: 10px;
+    color:crimson;
+}
+
 .field {
     position: relative;
     height: 55px;
@@ -71,7 +75,7 @@
 
 .field input:is(:focus, :valid) {
     padding-top: 10px;
-    text-indent: 18px;
+    text-indent: 20px;
     background: #444;
 }
 
@@ -167,4 +171,70 @@ button.disabled-button {
 
 .logout2:hover{
     color:crimson;
+}
+
+.disabled-input {
+    background-color: #f5f5f5;
+    color: #a9a9a9;
+    cursor: not-allowed;
+    border: 1px solid #dcdcdc;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.disabled-input:focus {
+    outline: none;
+}
+
+.purchases-header {
+    color: crimson; 
+    font-size: 2rem; 
+    font-weight: 600; 
+    text-align: center;
+    justify-self: center;
+    top:180px;
+    position:relative;
+    padding: 10px; 
+    width: 60%;
+    background-color: #222;  /* Dark background color */
+    border-radius: 10px;  /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Shadow for separation */
+}
+
+.purchases-container {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  /* Create flexible columns */
+    gap: 20px;  /* Space between items */
+    padding: 20px;  /* Padding around the grid */
+    justify-items: center;  /* Center the items within each grid cell */
+    margin-top: 200px;
+}
+
+.purchases-list-container {
+    background-color: #333;  /* Background for each purchased item */
+    padding: 15px;
+    border-radius: 10px;  /* Rounded corners for items */
+    text-align: center;  /* Center text and image inside the container */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.purchases-list-container:hover {
+    transform: translateY(-10px);  /* Slight upward movement when hovered */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Add shadow on hover */
+}
+
+.purchased-item {
+    width: 100%;  /* Make image fill the container */
+    height: auto;  /* Maintain aspect ratio */
+    border-radius: 8px;  /* Round the image corners */
+}
+
+.purchased-item-title {
+    color: white;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    display: block;
 }

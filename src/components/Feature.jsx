@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStoreContext } from "../context";
 import axios from "axios";
+import AddToCart from "./AddToCart";
 import './Feature.css'
 
 function Feature() {
@@ -52,7 +53,6 @@ function Feature() {
                 <div className="movie-list-wrapper">
                     <div className="movie-list" style={{ transform: `translateX(${currentTransform}px)` }}>
                         {shuffledMovies.map((movie, index) => (
-
                             <div className="movie-list-item" key={index}>
                                 <img
                                     className="movie-list-item-image"
@@ -62,7 +62,7 @@ function Feature() {
                                 <span className="movie-list-item-title">{movie.original_title}</span>
                                 <p className="movie-list-item-desc">{movie.overview}</p>
                                 <button className="movie-list-item-button" onClick={() => { loadMovie(movie.id) }}>Details</button>
-                                <button className="movie-list-item-button rent" onClick={() => { user ? setCart((prevCart) => prevCart.set(movie.id, { title: movie.original_title, poster: movie.poster_path })) : alert("Login first!") }}>{`${cart.has(movie.id) && user ? 'Added' : 'Add to Cart'}`}</button>
+                                <AddToCart className="movie-list-item-button rent" movie={movie} />
                             </div>
                         ))}
                     </div>
