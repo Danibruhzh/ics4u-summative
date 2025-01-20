@@ -40,7 +40,7 @@ function SettingsView() {
             setGenres(newGenres);
             if (loginWithEmail) {
                 if (firstName.trim() && lastName.trim()) {
-                    await updateProfile(user, { displayName: `${firstName.trim()} ${lastName.trim()}` });
+                    await updateProfile(auth.currentUser, { displayName: `${firstName.trim()} ${lastName.trim()}` });
                     setUser((prev) => ({ ...prev, displayName: `${firstName.trim()} ${lastName.trim()}` }));
                 }
             }
