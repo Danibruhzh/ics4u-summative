@@ -32,7 +32,6 @@ function SettingsView() {
         })();
     }, []);
 
-
     const update = async (event) => {
         event.preventDefault();
         if (genreMap.length >= 10) {
@@ -110,7 +109,6 @@ function SettingsView() {
                     <p className='current-label'>Current Email:</p>
                     <p>{user.email}</p>
                 </div>
-
                 <form>
                     <div>
                         <div className="field">

@@ -2,14 +2,12 @@ import './DetailView.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useStoreContext } from '../context'
 import AddToCart from '../components/AddToCart'
 
 function DetailView() {
     const [movie, setMovie] = useState([]);
     const [genres, setGenres] = useState([]);
     const [trailers, setTrailers] = useState([]);
-    const { cart, setCart, user } = useStoreContext();
     const params = useParams();
 
     useEffect(() => {

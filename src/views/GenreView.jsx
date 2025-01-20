@@ -15,7 +15,6 @@ function GenreView() {
     const navigate = useNavigate();
     const { user } = useStoreContext();
 
-
     useEffect(() => {
         (async function getMovies() {
             const response = await axios.get(

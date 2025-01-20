@@ -22,6 +22,7 @@ function Hero() {
   function loadMovie(id) {
     navigate(`/movies/details/${id}`);
   }
+  
   try {
     return (
       <div className="featured-content" style={{
@@ -34,7 +35,7 @@ function Hero() {
           <h1 className="featured-title">{movie.original_title}</h1>
           <p className="featured-desc">{movie.overview}</p>
           <button className="featured-button watch" onClick={() => { loadMovie(movie.id) }}>Details</button>
-          <AddToCart className="featured-button rent" movie={movie}/>
+          <AddToCart className="featured-button rent" movie={movie} />
         </div>
       </div>
     )
