@@ -32,7 +32,6 @@ function SettingsView() {
         })();
     }, []);
 
-
     const update = async (event) => {
         event.preventDefault();
         if (genreMap.length >= 10) {
@@ -41,7 +40,7 @@ function SettingsView() {
             setGenres(newGenres);
             if (loginWithEmail) {
                 if (firstName.trim() && lastName.trim()) {
-                    await updateProfile(user, { displayName: `${firstName.trim()} ${lastName.trim()}` });
+                    await updateProfile(auth.currentUser, { displayName: `${firstName.trim()} ${lastName.trim()}` });
                     setUser((prev) => ({ ...prev, displayName: `${firstName.trim()} ${lastName.trim()}` }));
                 }
             }
@@ -110,7 +109,6 @@ function SettingsView() {
                     <p className='current-label'>Current Email:</p>
                     <p>{user.email}</p>
                 </div>
-
                 <form>
                     <div>
                         <div className="field">

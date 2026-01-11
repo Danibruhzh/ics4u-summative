@@ -23,16 +23,14 @@ export const StoreProvider = ({ children }) => {
         }
 
         const docRef = doc(firestore, "users", user.uid);
-
         const userInfo = await getDoc(docRef);
         if (userInfo.exists()) {
           const getGenres = userInfo.data().genres;
           setGenres(getGenres);
           if (userInfo.data().purchases) {
             const getPurchases = Map(userInfo.data().purchases);
-            console.log(Map(getPurchases));
             setPurchases(getPurchases);
-          } else{
+          } else {
             setPurchases(Map());
           }
         }

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStoreContext } from "../context";
 import axios from "axios";
 import AddToCart from "./AddToCart";
 import './Feature.css'
@@ -10,7 +9,6 @@ function Feature() {
     const navigate = useNavigate();
     const [clickCount, setClickCount] = useState(0);
     const [currentTransform, setCurrentTransform] = useState(0);
-    const { cart, setCart, user } = useStoreContext();
 
     useEffect(() => {
         (async function getMovies() {

@@ -1,8 +1,8 @@
 import './RegisterView.css'
 import Background from '../images/movie feature.png'
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, firestore} from '../firebase';
-import { doc, setDoc } from "firebase/firestore"; 
+import { auth, firestore } from '../firebase';
+import { doc, setDoc } from "firebase/firestore";
 import { useStoreContext } from '../context'
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -42,10 +42,9 @@ function RegisterView() {
                 await updateProfile(user, { displayName: `${firstName.current.value} ${lastName.current.value}` });
                 setUser(user);
                 const docRef = doc(firestore, "users", user.uid);
-                await setDoc(docRef, {genres: newGenres});
+                await setDoc(docRef, { genres: newGenres });
                 navigate("/");
             } catch (error) {
-                console.log(error);
                 alert("Error creating account");
             }
         } else {
@@ -63,7 +62,7 @@ function RegisterView() {
                 const user = (await signInWithPopup(auth, new GoogleAuthProvider())).user;
                 setUser(user);
                 const docRef = doc(firestore, "users", user.uid);
-                await setDoc(docRef, {genres: newGenres});
+                await setDoc(docRef, { genres: newGenres });
                 navigate("/");
             } catch (error) {
                 alert("Error creating account");
@@ -105,7 +104,6 @@ function RegisterView() {
                     Freakflix
                 </h1>
             </div>
-
             <div className="island">
                 <h2>CREATE ACCOUNT</h2>
                 <form>

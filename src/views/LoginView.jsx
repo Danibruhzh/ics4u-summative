@@ -33,16 +33,15 @@ function LoginView() {
             setUser(user);
             try {
                 const docRef = doc(firestore, "users", user.uid);
-                console.log(user.uid);
                 const info = await getDoc(docRef);
                 if (info.data()) {
                     navigate("/");
-                } else{
-                    await setDoc(docRef, {genres: []});
+                } else {
+                    await setDoc(docRef, { genres: [] });
                     navigate("/settings");
                 }
             } catch (error) {
-                console.log(error);
+                alert("Error signing in!");
             }
         } catch (error) {
             alert("Error signing in!");
@@ -86,7 +85,7 @@ function LoginView() {
                     <div className="help">
                         <div className="remember">
                             <input type="checkbox" id="remember" />
-                            <label>Remember me</label>
+                            <label>I'm a good boy</label>
                         </div>
                         <a href="https://blockblast.org/" target='_blank'>Need help?</a>
                     </div>

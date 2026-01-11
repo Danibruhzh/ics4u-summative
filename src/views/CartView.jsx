@@ -12,7 +12,6 @@ function CartView() {
 
     useEffect(() => {
         localStorage.setItem(user.uid, JSON.stringify(cart.toJS()));
-        console.log(cart);
     });
 
     cart.forEach((movie, id) => {
@@ -32,8 +31,6 @@ function CartView() {
     const remove = (id) => {
         setCart((prevCart) => prevCart.delete(id))
     }
-
-
 
     async function checkout() {
         const docRef = doc(firestore, "users", user.uid);

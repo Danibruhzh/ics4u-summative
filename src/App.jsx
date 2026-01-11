@@ -14,7 +14,6 @@ import ProtectedRoutes from "./util/ProtectedRoutes"
 import ErrorView from "./views/ErrorView"
 
 function App() {
-
   return (
     <StoreProvider>
       <BrowserRouter>

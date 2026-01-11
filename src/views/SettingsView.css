@@ -50,9 +50,9 @@
     font-size: 2rem;
 }
 
-.current-label{
+.current-label {
     margin-top: 10px;
-    color:crimson;
+    color: crimson;
 }
 
 .field {
@@ -90,7 +90,7 @@
     transition: all 0.1s ease;
 }
 
-.field input:is(:focus, :valid) ~ label {
+.field input:is(:focus, :valid)~label {
     transform: translateY(-130%);
     font-size: 0.75rem;
 }
@@ -116,40 +116,60 @@ form button:hover {
 
 .genre-selector {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);  /* 3 buttons per row */
-    gap: 15px;                             /* Space between buttons */
-    width: 100%;                           /* Ensure it uses full width of the container */
-    max-width: 500px;                      /* Prevent buttons from stretching too wide */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 buttons per row */
+    gap: 15px;
+    /* Space between buttons */
+    width: 100%;
+    /* Ensure it uses full width of the container */
+    max-width: 500px;
+    /* Prevent buttons from stretching too wide */
     margin-top: 20px;
 }
 
 .selection {
-    padding: 10px 20px;           /* Add some padding to make the buttons easier to click */
-    font-size: 1rem;               /* Adjust font size */
-    border: 2px solid #ccc;       /* Border around the buttons */
-    background-color: #444;       /* Dark background for unselected state */
-    color: #fff;                  /* White text color */
-    cursor: pointer;              /* Cursor pointer for interactivity */
-    border-radius: 5px;            /* Rounded corners */
+    padding: 10px 20px;
+    /* Add some padding to make the buttons easier to click */
+    font-size: 1rem;
+    /* Adjust font size */
+    border: 2px solid #ccc;
+    /* Border around the buttons */
+    background-color: #444;
+    /* Dark background for unselected state */
+    color: #fff;
+    /* White text color */
+    cursor: pointer;
+    /* Cursor pointer for interactivity */
+    border-radius: 5px;
+    /* Rounded corners */
     transition: background-color 0.3s ease, color 0.3s ease;
-    outline: none;                 /* Remove the outline when clicking */
+    outline: none;
+    /* Remove the outline when clicking */
 }
 
 .selection.selected {
-    background-color: crimson;    /* Red background for selected button */
-    color: white;                 /* White text for selected button */
+    background-color: crimson;
+    /* Red background for selected button */
+    color: white;
+    /* White text for selected button */
 }
 
 .selection:hover {
-    background-color: #555;       /* Darker background when hovered */
+    background-color: #555;
+    /* Darker background when hovered */
 }
 
 .selector-title {
-    grid-column: span 3;                 /* Ensure the title takes up the full width */
-    text-align: center;                  /* Center the title */
-    margin-bottom: 15px;                  /* Space between the title and buttons */
-    color: #fff;                         /* White text color for the title */
-    font-size: 1.5rem;                   /* Adjust font size as needed */
+    grid-column: span 3;
+    /* Ensure the title takes up the full width */
+    text-align: center;
+    /* Center the title */
+    margin-bottom: 15px;
+    /* Space between the title and buttons */
+    color: #fff;
+    /* White text color for the title */
+    font-size: 1.5rem;
+    /* Adjust font size as needed */
 }
 
 button:disabled {
@@ -163,14 +183,14 @@ button.disabled-button {
     opacity: 0.5;
 }
 
-.logout2{
+.logout2 {
     cursor: pointer;
-    color:white;
-    transition:all 0.1s ease-in-out;
+    color: white;
+    transition: all 0.1s ease-in-out;
 }
 
-.logout2:hover{
-    color:crimson;
+.logout2:hover {
+    color: crimson;
 }
 
 .disabled-input {
@@ -187,47 +207,62 @@ button.disabled-button {
 }
 
 .purchases-header {
-    color: crimson; 
-    font-size: 2rem; 
-    font-weight: 600; 
+    color: crimson;
+    font-size: 2rem;
+    font-weight: 600;
     text-align: center;
     justify-self: center;
-    top:180px;
-    position:relative;
-    padding: 10px; 
+    top: 180px;
+    position: relative;
+    padding: 10px;
     width: 60%;
-    background-color: #222;  /* Dark background color */
-    border-radius: 10px;  /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Shadow for separation */
+    background-color: #222;
+    /* Dark background color */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Shadow for separation */
 }
 
 .purchases-container {
     display: grid;
     position: relative;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  /* Create flexible columns */
-    gap: 20px;  /* Space between items */
-    padding: 20px;  /* Padding around the grid */
-    justify-items: center;  /* Center the items within each grid cell */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    /* Create flexible columns */
+    gap: 20px;
+    /* Space between items */
+    padding: 20px;
+    /* Padding around the grid */
+    justify-items: center;
+    /* Center the items within each grid cell */
     margin-top: 200px;
 }
 
 .purchases-list-container {
-    background-color: #333;  /* Background for each purchased item */
+    background-color: #333;
+    /* Background for each purchased item */
     padding: 15px;
-    border-radius: 10px;  /* Rounded corners for items */
-    text-align: center;  /* Center text and image inside the container */
+    border-radius: 10px;
+    /* Rounded corners for items */
+    text-align: center;
+    /* Center text and image inside the container */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .purchases-list-container:hover {
-    transform: translateY(-10px);  /* Slight upward movement when hovered */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Add shadow on hover */
+    transform: translateY(-10px);
+    /* Slight upward movement when hovered */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Add shadow on hover */
 }
 
 .purchased-item {
-    width: 100%;  /* Make image fill the container */
-    height: auto;  /* Maintain aspect ratio */
-    border-radius: 8px;  /* Round the image corners */
+    width: 100%;
+    /* Make image fill the container */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 8px;
+    /* Round the image corners */
 }
 
 .purchased-item-title {
