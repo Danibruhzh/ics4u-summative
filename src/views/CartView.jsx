@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { firestore } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import "./Cartview.css"
+import "./CartView.css"
 
 function CartView() {
     const { cart, setCart, user, purchases, setPurchases } = useStoreContext();
