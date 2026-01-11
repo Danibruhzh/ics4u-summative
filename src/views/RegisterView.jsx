@@ -127,8 +127,6 @@ function RegisterView() {
                         <input type="password" ref={confirmPassword} onChange={updateForm} required />
                         <label>Re-enter Password</label>
                     </div>
-                    <button onClick={registerByEmail} disabled={!valid} className={!valid ? 'disabled-button' : ''}>Create Account</button>
-                    <button onClick={registerByGoogle} disabled={!isChecked} className={!isChecked ? 'disabled-button' : ''}>Sign in with Google</button>
                     <div className="help">
                         <div className="terms">
                             <input type="checkbox" id="terms" checked={isChecked} onClick={() => { setIsChecked(!isChecked) }} />
@@ -136,6 +134,8 @@ function RegisterView() {
                         </div>
                         <a href="#">Need help?</a>
                     </div>
+                    <button onClick={registerByEmail} disabled={!valid} className={!valid ? 'disabled-button' : ''}>Create Account</button>
+                    <button onClick={registerByGoogle} disabled={!isChecked} className={!isChecked ? 'disabled-button' : ''}>Sign in with Google</button>
                 </form>
                 <p>Already have an account? <a href="/login">Sign In</a></p>
                 <div className="genre-selector">
