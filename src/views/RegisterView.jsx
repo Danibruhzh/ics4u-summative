@@ -33,7 +33,7 @@ function RegisterView() {
 
     const registerByEmail = async (event) => {
         event.preventDefault();
-        if (genreMap.length >= 10) {
+        if (genreMap.length >= 5) {
             let fullList = genresAll;
             const newGenres = fullList.filter((item) => genreMap.includes(item.id));
             setGenres(newGenres);
@@ -48,13 +48,13 @@ function RegisterView() {
                 alert("Error creating account");
             }
         } else {
-            alert("Please select at least 10 genres!");
+            alert("Please select at least 5 genres!");
         }
     }
 
     const registerByGoogle = async (event) => {
         event.preventDefault();
-        if (genreMap.length >= 10) {
+        if (genreMap.length >= 5) {
             let fullList = genresAll;
             const newGenres = fullList.filter((item) => genreMap.includes(item.id));
             setGenres(newGenres);
@@ -68,7 +68,7 @@ function RegisterView() {
                 alert("Error creating account");
             }
         } else {
-            alert("Please select at least 10 genres!");
+            alert("Please select at least 5 genres!");
         }
     }
 
@@ -139,7 +139,7 @@ function RegisterView() {
                 </form>
                 <p>Already have an account? <a href="/login">Sign In</a></p>
                 <div className="genre-selector">
-                    <h3 className='selector-title'>Choose your prefered genres</h3>
+                    <h3 className='selector-title'>Choose your 5 prefered genres</h3>
                     {genresAll.map((genre) => (
                         <button key={genre.id} className={`selection ${genreMap.includes(genre.id) ? 'selected' : ''}`} onClick={() => {
                             select(genre);
