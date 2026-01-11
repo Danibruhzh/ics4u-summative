@@ -34,7 +34,7 @@ function SettingsView() {
 
     const update = async (event) => {
         event.preventDefault();
-        if (genreMap.length >= 10) {
+        if (genreMap.length >= 5) {
             let fullList = genresAll;
             const newGenres = fullList.filter((item) => genreMap.some((check) => check.id === item.id));
             setGenres(newGenres);
@@ -48,7 +48,7 @@ function SettingsView() {
             await updateDoc(docRef, { genres: newGenres, });
             navigate("/");
         } else {
-            alert("Please select at least 10 genres!");
+            alert("Please select at least 5 genres!");
         }
     }
 
@@ -85,7 +85,7 @@ function SettingsView() {
     return (
         <div className='register-container'>
             <img src={Background} alt="Movie background" className="background" />
-            {(!(user.providerData[0].providerId == "google.com" && genres.length < 10)) && (
+            {(!(user.providerData[0].providerId == "google.com" && genres.length < 5)) && (
                 <div>
                     <button className="home" id="home-button" onClick={() => navigate('/')}>Home</button>
                 </div>
